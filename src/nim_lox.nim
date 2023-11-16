@@ -1,5 +1,28 @@
-# This is just an example to get you started. A typical binary package
-# uses this file as the main entry point of the application.
+import os 
+import std/strutils
+
+proc run(source: string) = 
+    let tokens = source.splitWhitespace()
+    for token in tokens:
+      echo token
+
+proc runFile(path: string) =
+  run(readFile(path))
+
+proc runPrompt() = 
+  while true:
+    stdout.write("> ")
+    let line = readLine(stdin)
+    if line == "":
+      break
+    run(line)
 
 when isMainModule:
-  echo("Hello, World!")
+  let args = commandLineParams()
+  if args.len > 1:
+    echo "Usage: nimlox [script]"
+    quit(64)
+  elif args.len == 1:
+    runFile(args[0])
+  else:
+    runPrompt()
