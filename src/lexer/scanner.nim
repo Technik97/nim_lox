@@ -2,9 +2,9 @@ import options
 import std/strutils
 import tables
 
-import ../lexer/token
-import ../lexer/tokenType
-import ../lexer/literal
+import ./token
+import ./tokenType
+import ./literal
 import ../core/error
 import ./keywords
 
